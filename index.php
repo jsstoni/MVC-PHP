@@ -1,0 +1,14 @@
+<?php
+session_start();
+define('DS', DIRECTORY_SEPARATOR);
+define('ROOT', realpath(dirname(__FILE__)).DS);
+function autoloading() {
+	spl_autoload_register(function ($class) {
+		$file = str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
+		if (file_exists($file)) {
+			require_once $file;
+			return;
+		}
+	});
+}
+autoloading();
