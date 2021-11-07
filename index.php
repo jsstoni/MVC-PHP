@@ -2,7 +2,7 @@
 session_start();
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', realpath(dirname(__FILE__)).DS);
-require_once 'assets/vendor/autoload.php'; #composer
+#require_once 'assets/vendor/autoload.php'; #composer
 function autoloading() {
 	spl_autoload_register(function ($class) {
 		$file = str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
@@ -13,5 +13,6 @@ function autoloading() {
 	});
 }
 autoloading();
-$router = new src\Route;
+$router = new src\Router;
 $router->setMain('/');
+$router->run();

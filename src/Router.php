@@ -36,5 +36,10 @@ class Router
 	{
 		$this->ROUTERS[$pattern] = $fn;
 	}
+
+	public function run()
+	{
+		print_r($this->ROUTERS);
+	}
 }
 ?>
