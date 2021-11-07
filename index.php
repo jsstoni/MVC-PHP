@@ -14,3 +14,4 @@ function autoloading() {
 }
 autoloading();
 $router = new src\Route;
+$router->setMain('/');
