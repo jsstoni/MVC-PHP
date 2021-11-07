@@ -78,6 +78,8 @@ class Router
 
 	private function _arguments($path)
 	{
+		$__GET = array();
+		$__POST = isset($_POST) ? $_POST : array();
 		$args = array();
 		$route_ex = explode('/', $path[0]);
 		$url_ex = explode('/', rtrim($this->REQUEST_URL, '/'));
@@ -95,7 +97,9 @@ class Router
 				}
 			}
 		}
-		return $args;
+		$__GET = $args;
+		$request['req'] = new Request($__GET, $__POST);
+		return $request;
 	}
 
 	public function run()

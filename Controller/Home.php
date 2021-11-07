@@ -5,7 +5,8 @@
 namespace Controller;
 class Home
 {
-	public function default() {
-		print_r(func_get_args());
+	public function Default($req)
+	{
+		echo $req->__GET('id');
 	}
 }
