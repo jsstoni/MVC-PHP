@@ -76,13 +76,37 @@ class Router
 		return $controller;
 	}
 
+	private function _arguments($path)
+	{
+		$args = array();
+		$route_ex = explode('/', $path[0]);
+		$url_ex = explode('/', $this->REQUEST_URL);
+		
+		if (($key_main = array_search(trim($this->getMain(), '/'), $url_ex)) !== false) {
+			unset($url_ex[$key_main]);
+		}
+
+		$query = array_combine($route_ex, $url_ex);
+		foreach ($query as $key => $value) {
+			if (preg_match(self::DEFAULT_REGEX, $key)) {
+				$key = str_replace(':', '', $key);
+				if (! array_key_exists($key, $args)) {
+					$args[$key] = $value;
+				}else {
+					throw new Exception("Error Processing Request", 1);
+				}
+			}
+		}
+		return $args;
+	}
+
 	public function run()
 	{
 		$r = $this->_mactchUrl($this->REQUEST_URL);
 		if ($r) {
 			$path = array_keys($r);
 			$fn = array_values($r);
-			call_user_func_array($this->_callback($fn[0]), array());
+			call_user_func_array($this->_callback($fn[0]), $this->_arguments($path));
 		}else {
 			echo "Error";
 		}
