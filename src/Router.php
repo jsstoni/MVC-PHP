@@ -7,12 +7,17 @@ class Router
 {
 	private	$REQUEST_URL,
 			$HOST_URL,
-			$MAIN_FOLDER;
+			$MAIN_FOLDER,
+			$ROUTERS = [];
 
 	public function __construct()
 	{
 		$this->REQUEST_URL = $_SERVER['REQUEST_URI'];
 		$this->HOST_URL = $_SERVER['HTTP_HOST'];
+		$routes = require_once ROOT . 'config' . DS .'routes.php';
+		foreach ($routes as $pattern => $fn) {
+			$this->add($pattern, $fn);
+		}
 	}
 
 	public function setMain($path)
@@ -25,6 +30,11 @@ class Router
 	public function getMain()
 	{
 		return $this->MAIN_FOLDER;
+	}
+
+	public function add($pattern, $fn)
+	{
+		$this->ROUTERS[$pattern] = $fn;
 	}
 }
 ?>
