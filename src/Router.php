@@ -47,7 +47,7 @@ class Router
 		return $str;
 	}
 
-	private function _callback($url = '/')
+	private function _mactchUrl($url = '/')
 	{
 		return array_filter($this->ROUTERS, function($k) use ($url) {
 			$e = $this->getMain().$k;
@@ -55,10 +55,34 @@ class Router
 		}, ARRAY_FILTER_USE_KEY);
 	}
 
+	private function _callback($fn)
+	{
+		switch (true) {
+			case (is_string($fn)):
+				list($controller, $method) = explode("@", $fn);
+				$controller = "Controller\\{$controller}";
+				$controller = array((new $controller), $method);
+				break;
+			case (is_array($fn)):
+				$controller = $fn;
+				break;
+			case (is_callable($fn)):
+				$controller = $fn;
+				break;
+			default:
+				$controller = NULL;
+				break;
+		}
+		return $controller;
+	}
+
 	public function run()
 	{
-		if ($r = $this->_callback($this->REQUEST_URL)) {
-			echo "Success";
+		$r = $this->_mactchUrl($this->REQUEST_URL);
+		if ($r) {
+			$path = array_keys($r);
+			$fn = array_values($r);
+			call_user_func_array($this->_callback($fn[0]), array());
 		}else {
 			echo "Error";
 		}
