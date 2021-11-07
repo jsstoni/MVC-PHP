@@ -13,4 +13,14 @@ abstract class Controller {
 		$loader = new \Twig\Loader\FilesystemLoader(static::DIRECTORY_VIEW);
 		return new \Twig\Environment($loader, ["debug" => true]);
 	}
+
+	public function makeModel($file)
+	{
+		$pathFile = ROOT . "model" . DS . $file . ".php";
+		if (file_exists($pathFile)) {
+			$model = "Model\\{$file}";
+			return new $model;
+		}
+		throw new Exception("Modelo no existe", 1);
+	}
 }
