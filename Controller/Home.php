@@ -9,6 +9,7 @@ class Home extends Controller
 	public function Default($req)
 	{
 		$user = $this->makeModel('User');
-		parent::View('index.html', ['virtual' => $user->virtual()]);
+		$user->virtual();
+		parent::View('index.html');
 	}
 }

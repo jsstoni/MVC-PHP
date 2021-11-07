@@ -1,28 +1,32 @@
 <?php
 namespace src;
-use PDO;
 class DB {
-	public $db;
-	private static $instance;
+	private $db;
+	private $stmt;
+	private $data;
+
 	public function __construct()
 	{
-		try {
-			$this->db = new PDO('mysql:host=localhost;dbname=selge', 'root', '', array(
-				PDO::ATTR_EMULATE_PREPARES => false,
-				PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8", 
-				PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
-			));
-			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		} catch (PDOException $e) {
-			echo $e->getMessage();
-		}
+		$this->db = dbConnect::getInstance();
 	}
-	public static function getInstance()
+
+	public function query(string $sql, array $params = [])
 	{
-		if (!isset(self::$instance)) {
-			$object = __CLASS__;
-			self::$instance = new $object;
+		try {
+			$this->stmt = $this->db->prepare($sql);
+			$this->stmt->execute($params);
+		} catch (Exception $e) {
+			die($e->getMessage());
 		}
-		return self::$instance;
+		return $this;
+	}
+
+	public function fetchAll() {
+		return $this->stmt->fetchAll();
+	}
+
+	public function sizeRow()
+	{
+		return $this->stmt->rowCount();
 	}
 }
