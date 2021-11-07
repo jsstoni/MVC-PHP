@@ -3,10 +3,11 @@
  * 
  */
 namespace Controller;
-class Home
+use src\Controller;
+class Home extends Controller
 {
 	public function Default($req)
 	{
-		echo $req->__GET('id');
+		parent::View('index.html', ['virtual' => 'Casa']);
 	}
 }

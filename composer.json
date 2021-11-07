@@ -1,5 +1,8 @@
 {
 	"config": {
 		"vendor-dir": "assets/vendor"
+	},
+	"require": {
+		"twig/twig": "^3.0"
 	}
 }
