@@ -6,6 +6,6 @@ namespace Controller;
 class Home
 {
 	public function default() {
-		echo "probando controlador";
+		print_r(func_get_args());
 	}
 }

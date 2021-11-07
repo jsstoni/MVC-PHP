@@ -1,5 +1,5 @@
 <?php
 return [
-	'/' => 'Home@Default'
+	'/:id' => 'Home@Default'
 ];
 ?>
