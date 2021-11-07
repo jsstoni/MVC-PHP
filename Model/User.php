@@ -1,6 +1,7 @@
 <?php
 namespace Model;
-class User {
+use src\Model;
+class User extends Model {
 	public function virtual()
 	{
 		return "TEST";
