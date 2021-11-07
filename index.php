@@ -14,5 +14,5 @@ function autoloading() {
 }
 autoloading();
 $router = new src\Router;
-$router->setMain('/');
+$router->setMain('/MVC-PHP');
 $router->run();
