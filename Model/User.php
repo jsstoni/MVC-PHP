@@ -4,6 +4,6 @@ use src\Model;
 class User extends Model {
 	public function virtual()
 	{
-		var_dump($this->query("SELECT * FROM clientes LIMIT :limit", array('limit' => 1))->sizeRow());
+		return $this->insert('order_id', array('usuario' => 2, 'order_id' => 1));
 	}
 }

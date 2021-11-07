@@ -9,7 +9,10 @@ class Home extends Controller
 	public function Default($req)
 	{
 		$user = $this->makeModel('User');
-		$user->virtual();
-		parent::View('index.html');
+		if ($user->virtual()) {
+			echo "Ingresado";
+		}else {
+			echo "Error al ingresar";
+		}
 	}
 }
