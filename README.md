@@ -18,3 +18,5 @@ Router::get('/', function ($req) {
 //use controller
 Router::get('/other', 'Controller\Web@home');
 ```
+
+`php -S localhost:9000`
