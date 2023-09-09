@@ -6,4 +6,4 @@ Router::get('/', function ($req) {
 	echo "hola mundo";
 });
 
-Router::get('/other', 'Controller\Web@home');
+Router::get('/other', 'Controllers\Web@home');

@@ -2,10 +2,12 @@
 	"autoload": {
 		"psr-4": {
 			"App\\": "src",
-			"Controller\\": "app\\controller"
+			"Controllers\\": "app\\controllers",
+			"Models\\": "app\\models"
 		}
 	},
 	"require": {
-		"firebase/php-jwt": "^6.4"
+		"firebase/php-jwt": "^6.4",
+		"illuminate/database": "^8.83"
 	}
 }
