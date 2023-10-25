@@ -16,14 +16,14 @@ trait RouteUtils
     {
         $files = glob($path . '/*.php');
         foreach ($files as $file) {
-			if (basename($file) == "web.php") {
+            if (basename($file) == "web.php") {
                 self::$useRouter->currentGroup = "";
-				require_once $file;
-			}else {
+                require_once $file;
+            } else {
                 self::$useRouter->currentGroup = '/' . str_replace(".php", "", basename($file));
-				require_once $file;
-			}
-		}
+                require_once $file;
+            }
+        }
     }
 
     public static function add($cb = null)
