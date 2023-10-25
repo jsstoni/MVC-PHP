@@ -2,6 +2,7 @@
 
 namespace App\Router;
 
+use App\HandleRequest;
 use App\Request;
 use App\Response;
 
@@ -74,24 +75,24 @@ class useRouter
                 $path = $this->main . $route['path'];
                 $pattern = '#^' . preg_replace('#/:([^/]+)#', '/(?<$1>[^/]+)', $path) . '(/?)?(\?.*)?$#';
                 if (preg_match($pattern, $pathWithQuery, $matches)) {
-                    $request = new Request();
+                    $handleRequest = new HandleRequest();
                     $params = array_intersect_key($matches, array_flip(array_filter(array_keys($matches), 'is_string')));
-                    $request->setParams($params);
-                    $params = $request->getParams();
+                    $handleRequest->setParams($params);
+                    $request = $handleRequest->getParams();
                     foreach ($route['middleware'] as $middleware) {
                         $midlePart = explode(":", $middleware);
                         $className = $midlePart[0];
                         $methodName = $midlePart[1];
-                        $fullClassName = "Middleware\\{$className}";
-                        if (class_exists($fullClassName)) {
-                            $middleInstance = new $fullClassName();
-                            $call = call_user_func(array($middleInstance, $methodName), $params);
+                        $classMiddleware = "Middleware\\{$className}";
+                        if (class_exists($classMiddleware)) {
+                            $middleInstance = new $classMiddleware();
+                            $call = call_user_func(array($middleInstance, $methodName), $request);
                             if (isset($call['error'])) {
                                 exit(json_encode($call));
                             }
                         }
                     }
-                    return call_user_func($this->typeHandler($route['handler']), $params, $response);
+                    return call_user_func($this->typeHandler($route['handler']), $request, $response);
                 }
             }
         }
