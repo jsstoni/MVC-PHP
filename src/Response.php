@@ -20,6 +20,7 @@ class Response
 
     public function send($any = "")
     {
+        echo $any;
     }
 
     public function render($path, $data = [])

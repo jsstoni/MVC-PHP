@@ -3,6 +3,7 @@
 namespace App\Router;
 
 use App\Request;
+use App\Response;
 
 class useRouter
 {
@@ -61,10 +62,11 @@ class useRouter
 
     public function dispatch($method, $url)
     {
+        $response = new Response();
         $urlParts = parse_url($url);
         $pathWithQuery = $urlParts['path'] . (isset($urlParts['query']) ? '?' . $urlParts['query'] : '');
         if ($method === 'OPTIONS') { //preflight fix
-            http_response_code(200);
+            $response->status(200);
             exit();
         }
         foreach ($this->routes as $route) {
@@ -83,17 +85,17 @@ class useRouter
                         $fullClassName = "Middleware\\{$className}";
                         if (class_exists($fullClassName)) {
                             $middleInstance = new $fullClassName();
-                            $response = call_user_func(array($middleInstance, $methodName), $params);
-                            if (isset($response['error'])) {
-                                exit(json_encode($response));
+                            $call = call_user_func(array($middleInstance, $methodName), $params);
+                            if (isset($call['error'])) {
+                                exit(json_encode($call));
                             }
                         }
                     }
-                    return call_user_func($this->typeHandler($route['handler']), $params);
+                    return call_user_func($this->typeHandler($route['handler']), $params, $response);
                 }
             }
         }
-        http_response_code(404);
+        $response->status(404);
         exit("404 Not Found");
     }
 }
