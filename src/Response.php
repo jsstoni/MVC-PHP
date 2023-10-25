@@ -26,6 +26,7 @@ class Response
     public function render($path, $data = [])
     {
         $tpl = new Engine('app/views');
+        $tpl->addFolder("layouts", "app/views/layouts");
         echo $tpl->render($path, $data);
     }
 }
