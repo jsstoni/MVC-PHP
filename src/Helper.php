@@ -10,7 +10,7 @@ class Helper
     private static $privateKey = 'vR86^0YK2F&Xcy#35%ofj%wdrgNDAfH3scM&5w7p9yunzct6i^';
     private static $method = 'aes-256-ecb';
 
-    public static function baseEncode($string)
+    public static function baseEncode($string): string
     {
         return rtrim(strtr(base64_encode($string), '+/', '-_'), '=');
     }
