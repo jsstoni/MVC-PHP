@@ -6,6 +6,8 @@ class Response
 {
     public function status($statusCode)
     {
+        http_response_code($statusCode);
+        return $this;
     }
 
     public function json($obj = [])
