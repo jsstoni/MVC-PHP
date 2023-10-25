@@ -46,7 +46,7 @@ class HandleRequest
         }
     }
 
-    public function setParams($params, $k = '')
+    public function setParams(array $params, string $k = '')
     {
         if (is_array($params)) {
             foreach ($params as $key => $value) {
