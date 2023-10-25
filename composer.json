@@ -8,6 +8,7 @@
 	},
 	"require": {
 		"firebase/php-jwt": "^6.4",
-		"illuminate/database": "^8.83"
+		"illuminate/database": "^8.83",
+		"league/plates": "^3.5"
 	}
 }

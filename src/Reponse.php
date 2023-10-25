@@ -2,6 +2,8 @@
 
 namespace App;
 
+use League\Plates\Engine as Engine;
+
 class Response
 {
     public function status($statusCode)
@@ -20,7 +22,9 @@ class Response
     {
     }
 
-    public function render($template, $data = [])
+    public function render($path, $data = [])
     {
+        $tpl = new Engine('/app/views');
+        echo $tpl->render($path, $data);
     }
 }
