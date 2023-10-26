@@ -3,7 +3,6 @@
 namespace App\Router;
 
 use App\HandleRequest;
-use App\Request;
 use App\Response;
 
 class useRouter
@@ -12,12 +11,12 @@ class useRouter
     public $currentGroup = '';
     public $main = '/';
 
-    public function __construct($base)
+    public function __construct(string $base)
     {
         $this->main = ltrim($base, '/');
     }
 
-    public function group($cb)
+    public function group(callable $cb): void
     {
         if (is_callable($cb)) {
             $cb();
@@ -25,7 +24,7 @@ class useRouter
         $this->currentGroup = '';
     }
 
-    public function addRoute($method, $path, $handler, $middleware)
+    public function addRoute(string $method, string $path, $handler, $middleware): void
     {
         $path = $this->currentGroup != '' ? ($path != '/' ? $this->currentGroup . $path : $this->currentGroup) : $path;
         foreach ($this->routes as $route) {
@@ -61,7 +60,7 @@ class useRouter
         return $controller;
     }
 
-    public function dispatch($method, $url)
+    public function dispatch(string $method, string $url)
     {
         $response = new Response();
         $urlParts = parse_url($url);
