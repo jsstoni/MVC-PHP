@@ -6,6 +6,14 @@ use League\Plates\Engine as Engine;
 
 class Response
 {
+    private $tplEngie;
+
+    public function __construct()
+    {
+        $this->tplEngie = new Engine("app/views");
+        $this->tplEngie->addFolder("layouts", "app/views/layouts");
+    }
+
     public function status(int $statusCode): self
     {
         http_response_code($statusCode);
@@ -23,10 +31,12 @@ class Response
         echo $any;
     }
 
-    public function render(string $path, array $data = []): void
+    public function render(string $path, array $data = [])
     {
-        $tpl = new Engine('app/views');
-        $tpl->addFolder("layouts", "app/views/layouts");
-        echo $tpl->render($path, $data);
+        try {
+            echo $this->tplEngie->render($path, $data);
+        } catch (\Exception $error) {
+            throw new \Exception("file '$path' not found in view");
+        }
     }
 }
