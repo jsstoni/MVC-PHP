@@ -1,8 +1,8 @@
 <?php
 
-use App\Request;
-use App\Response;
-use App\Router\Router;
+use App\Http\Request;
+use App\Http\Response;
+use App\Http\Router;
 
 Router::get('/', function (Request $req, Response $res) {
     $res->status(200)->render("index");

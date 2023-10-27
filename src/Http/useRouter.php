@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Router;
+namespace App\Http;
 
-use App\HandleRequest;
-use App\Response;
+use App\Http\HandleRequest;
+use App\Http\Response;
 
 class useRouter
 {

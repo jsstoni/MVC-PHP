@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Router;
+namespace App\Http;
 
-use App\Router\RouteUtils;
-use App\Router\useRouter;
+use App\Http\RouteUtils;
+use App\Http\useRouter;
 
 abstract class Router extends useRouter
 {
