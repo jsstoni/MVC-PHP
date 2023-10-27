@@ -1,15 +1,18 @@
 {
-	"autoload": {
-		"psr-4": {
-			"App\\": "src",
-			"Controllers\\": "app\\controllers",
-			"Models\\": "app\\models"
-		}
-	},
-	"require": {
-		"firebase/php-jwt": "^6.4",
-		"illuminate/database": "^8.83",
-		"league/plates": "^3.5",
-		"vlucas/phpdotenv": "^5.5"
-	}
+  "autoload": {
+    "psr-4": {
+      "App\\": "src",
+      "Controllers\\": "app\\controllers",
+      "Models\\": "app\\models"
+    }
+  },
+  "require": {
+    "firebase/php-jwt": "^6.4",
+    "illuminate/database": "^8.83",
+    "league/plates": "^3.5",
+    "vlucas/phpdotenv": "^5.5"
+  },
+  "scripts": {
+    "dev": "php -S localhost:9000 -t public server.php"
+  }
 }
