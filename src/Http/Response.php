@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use League\Plates\Engine as Engine;
+use League\Plates\Extension\Asset as Asset;
 
 class Response
 {
@@ -11,6 +12,7 @@ class Response
     public function __construct()
     {
         $this->tplEngie = new Engine("app/views");
+        $this->tplEngie->loadExtension(new Asset("public/", false));
         $this->tplEngie->addFolder("layouts", "app/views/layouts");
     }
 
