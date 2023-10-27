@@ -7,12 +7,14 @@ use App\Helper;
 class HandleRequest
 {
     private $params = array();
-    private $contentType = "";
+    private $contentType;
+    private $method;
 
     public function __construct()
     {
-        $body = file_get_contents('php://input');
+        $body = file_get_contents('php://input') ?: null;
         $this->contentType = $_SERVER['CONTENT_TYPE'] ?? '';
+        $this->method = $_SERVER['REQUEST_METHOD'];
         $this->params['query'] = $_GET ?? [];
         if ($this->contentType === "application/x-www-form-urlencoded" || strpos($this->contentType, 'multipart/form-data') !== false) {
             $this->processRequest($body);
@@ -35,11 +37,27 @@ class HandleRequest
         }
     }
 
+    private function processFormData($body): array
+    {
+        preg_match('/boundary=(.*)$/', $this->contentType, $matches);
+        $blocks = preg_split('/-+' . ($matches[1] ?? '') . '/', $body);
+        array_pop($blocks);
+        $data = [];
+        foreach ($blocks as $block) {
+            if (empty($block)) {
+                continue;
+            }
+            preg_match('/name=\"([^\"]*)\"[\n|\r]+([^\n\r].*)?\r$/s', $block, $matches);
+            $data[$matches[1]] = $matches[2];
+        }
+        return $data;
+    }
+
     public function processRequest($body)
     {
-        $method = $_SERVER['REQUEST_METHOD'];
-        if ($method == 'PUT' || $method == 'DELETE') {
-            //procesando
+        if ($this->method == 'PUT') {
+            parse_str($body, $x_www);
+            $this->params['body'] = $this->processFormData($body) ?: $x_www;
         } else {
             $this->params['body'] = $_POST;
             $this->params['files'] = $_FILES;
