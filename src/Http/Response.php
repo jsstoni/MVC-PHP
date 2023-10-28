@@ -11,9 +11,9 @@ class Response
 
     public function __construct()
     {
-        $this->tplEngie = new Engine("app/views");
-        $this->tplEngie->loadExtension(new Asset("public/", false));
-        $this->tplEngie->addFolder("layouts", "app/views/layouts");
+        $this->tplEngie = new Engine(__DIR__ . "/../../app/views");
+        $this->tplEngie->loadExtension(new Asset(__DIR__ . "/../../public/", false));
+        $this->tplEngie->addFolder("layouts", __DIR__ . "/../../app/views/layouts");
     }
 
     public function status(int $statusCode): self

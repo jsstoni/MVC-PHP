@@ -12,15 +12,15 @@ trait RouteUtils
         return self::$useRouter;
     }
 
-    public static function read($path)
+    public static function listFolderRoutes($path)
     {
         $files = glob($path . '/*.php');
         foreach ($files as $file) {
-            if (basename($file) == "web.php") {
-                self::$useRouter->currentGroup = "";
+            if (basename($file) != "web.php") {
+                self::$useRouter->currentGroup = '/' . str_replace(".php", "", basename($file));
                 require_once $file;
             } else {
-                self::$useRouter->currentGroup = '/' . str_replace(".php", "", basename($file));
+                self::$useRouter->currentGroup = "";
                 require_once $file;
             }
         }

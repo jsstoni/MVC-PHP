@@ -12,7 +12,7 @@ abstract class Router extends useRouter
     public static function create($base)
     {
         self::$useRouter = new useRouter($base);
-        self::read('./routes');
+        self::listFolderRoutes(__DIR__ . '/../../routes');
     }
 
     public static function get(String $path, $handler, ...$middleware)

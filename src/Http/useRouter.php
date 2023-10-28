@@ -13,7 +13,7 @@ class useRouter
 
     public function __construct(string $base)
     {
-        $this->main = ltrim($base, '/');
+        $this->main = $base;
     }
 
     public function group(callable $cb): void
@@ -71,7 +71,7 @@ class useRouter
         }
         foreach ($this->routes as $route) {
             if ($route['method'] == $method) {
-                $path = $this->main . $route['path'];
+                $path = rtrim($this->main . $route['path'], '/');
                 $pattern = '#^' . preg_replace('#/:([^/]+)#', '/(?<$1>[^/]+)', $path) . '(/?)?(\?.*)?$#';
                 if (preg_match($pattern, $pathWithQuery, $matches)) {
                     $handleRequest = new HandleRequest();
