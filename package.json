@@ -1,0 +1,14 @@
+{
+  "name": "mvc-php",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "tcss": "pnpx tailwindcss -i ./resources/assets/input.css -o ./public/css/app.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.3.5"
+  }
+}
