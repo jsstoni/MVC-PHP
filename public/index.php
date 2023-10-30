@@ -1,7 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 
-use App\Http\Router;
+use Route\Router;
 use Dotenv\Dotenv;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
