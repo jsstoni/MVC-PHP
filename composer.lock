@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "efdc06374d8400d28d9cb336caea1a6b",
+    "content-hash": "a3c44a0cbd3a841cf8e69270297ee37e",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -559,16 +559,16 @@
         },
         {
             "name": "jsstoni/router",
-            "version": "v1.0.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jsstoni/Router.git",
-                "reference": "f25207b167b4ca1634024fc1b1f5b7dc614ae366"
+                "reference": "94cba13b1688bb33276c0d7c07becf6afd28298f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsstoni/Router/zipball/f25207b167b4ca1634024fc1b1f5b7dc614ae366",
-                "reference": "f25207b167b4ca1634024fc1b1f5b7dc614ae366",
+                "url": "https://api.github.com/repos/jsstoni/Router/zipball/94cba13b1688bb33276c0d7c07becf6afd28298f",
+                "reference": "94cba13b1688bb33276c0d7c07becf6afd28298f",
                 "shasum": ""
             },
             "require": {
@@ -604,9 +604,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jsstoni/Router/issues",
-                "source": "https://github.com/jsstoni/Router/tree/v1.0.1"
+                "source": "https://github.com/jsstoni/Router/tree/v1.2.0"
             },
-            "time": "2023-10-29T21:42:37+00:00"
+            "time": "2023-11-24T16:38:04+00:00"
         },
         {
             "name": "league/plates",

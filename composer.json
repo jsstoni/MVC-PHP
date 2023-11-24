@@ -7,7 +7,7 @@
     }
   },
   "require": {
-    "jsstoni/router": "^1.0",
+    "jsstoni/router": "^1.2",
     "illuminate/database": "^8.83",
     "vlucas/phpdotenv": "^5.5"
   },
