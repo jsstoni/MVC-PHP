@@ -1,10 +1,10 @@
 <?php
 
-namespace Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-require_once("./src/DataBase.php");
+require_once("./src/utils/DataBase.php");
 
 class Project extends Model
 {

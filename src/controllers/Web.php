@@ -1,8 +1,8 @@
 <?php
 
-namespace Controllers;
+namespace App\Controllers;
 
-use Models\Project as Project;
+use App\Models\Project as Project;
 
 class Web
 {
